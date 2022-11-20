@@ -1,0 +1,48 @@
+checkpoint_exists: False
+checkpoint_path: '/home/training_data/best_model_150.pth'
+model_checkpointing_iteration: 4
+learning_rate: 0.002 # 0.00033/0.00035/0.000375/0.0004 if sqrt 0.007 for b=256 or 0.005 for 32
+bucket_size_multiplier: 5
+epochs: 10
+hidden_units: 150
+train_batch_size: 256
+val_batch_size: 8192
+early_stopping_patience: 10
+early_stopping_delta: 0.5
+embed_size : 100 # 100/300
+num_workers: 7
+save_best_model_path: '/home/training_data/best_model_150.pth'
+save_final_model_path: '/home/training_data/final_model_150.pth'
+
+proto_batch_size: 34
+train_val_ratio : 0.0
+
+
+context_length : 400
+question_length : 30
+answer_length : 20
+exponential_mask : False
+
+vocab_pad_index : 0
+
+vocab_path: '/home/pickle_objects/vocab_object_2.pkl'
+trained_weights_path: '/home/pickle_objects/squad_weight_2.pkl'
+
+train_set_path: '/home/datasets/squad.csv'
+dev_set_path: '/home/datasets/squad_dev.csv'
+
+#saved_model_path: '/home/saved_models/squad_model.pth'
+
+train_padded_context_path: '/home/pickle_objects/pad_2/c_train_pad.pkl'
+train_padded_question_path: '/home/pickle_objects/pad_2/q_train_pad.pkl'
+train_padded_answer_path: '/home/pickle_objects/pad_2/ans_train_pad.pkl'
+
+val_padded_context_path: '/home/pickle_objects/pad_2/c_val_pad.pkl'
+val_padded_question_path: '/home/pickle_objects/pad_2/q_val_pad.pkl'
+val_padded_answer_path: '/home/saved_models/best_model_150_retrain_high.pth'
+
+
+
+
+
+
