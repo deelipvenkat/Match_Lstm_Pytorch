@@ -1,0 +1,12 @@
+*.pkl
+*.pth
+*.pt
+*.pyc
+*.log
+.*
+*.ipynb
+*/
+!/main/
+!/train/
+!/models/
+!/.gitignore
