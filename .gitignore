@@ -10,3 +10,4 @@
 !/train/
 !/models/
 !/.gitignore
+logs.txt
