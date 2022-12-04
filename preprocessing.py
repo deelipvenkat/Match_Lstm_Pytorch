@@ -1,3 +1,12 @@
+"""inital data preprocessing pipeline
+
+  functions:
+    train_preprocessor
+    test_preprocessor
+    test_answer_preprocessor
+
+"""
+
 import numpy as np
 import pickle
 import yaml
@@ -332,24 +341,7 @@ def test_answer_processing(h,vocab): # h is list of set of answers
 #------------------------------------------------------------------------------------------------#
 
 if __name__=='__main__':
-
-  df=pd.read_csv('/home/datasets/squad.csv')
-  #df_test=pd.read_csv('/home/datasets/squad_test.csv')
-  
-  #df_test['answer_text']=df_test['answer_text'].apply(eval)
-  #vocab=pickle.load(open('pickle_objects/vocab_object.pkl','rb'))
-  
-  df_train,df_val=splitter(df,0.05)
-
-
-  #c_train_pad,q_train_pad,ans_train_pad=train_preprocessor(df_val,vocab)
-  #c_val,q_val=test_preprocessor(df_test,vocab)
-  
-  #c_=answer_tokenizer(df_test['answer_text']) # tokenization
-
-  #ans_val=test_answer_processing(c_,vocab)
-
-  #dt=batched_data(c_val,q_val,ans_val,batch=10,num_workers=1)
+  pass
 
 
 

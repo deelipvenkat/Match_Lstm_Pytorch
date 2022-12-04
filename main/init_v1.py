@@ -1,4 +1,5 @@
-from distutils.command.build import build
+"""top level module to start training the network with checkpointing"""
+
 import pandas as pd
 import numpy as np
 import pickle

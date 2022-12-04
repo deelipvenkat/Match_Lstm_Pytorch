@@ -1,3 +1,5 @@
+"""module containing the match-lstm model optimized with pack-padded-sequence"""
+
 import torch 
 import torch.nn as nn
 import torch.nn.functional as F

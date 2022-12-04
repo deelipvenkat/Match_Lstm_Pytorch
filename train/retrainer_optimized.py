@@ -1,3 +1,6 @@
+"""optimized with bucketbatch sampler to add noise 
+   when packing similar length sequences """
+
 import torch
 import torch.nn.functional as F
 import sys

@@ -1,3 +1,5 @@
+"""functions used to compute output probabilites of the model and validation loss"""
+
 import pandas as pd
 import numpy as np
 import pickle

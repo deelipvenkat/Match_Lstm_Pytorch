@@ -81,6 +81,7 @@ for k,i in enumerate(end):
 
 #-------------------------------------------------------------------------------------------------
 def spacytoken_to_string (context,start,end):
+  
   """
   returns a list of answers used to slice exact answer form question, takes in spacy tokenized 
   text object , answer start/end index.

@@ -1,3 +1,9 @@
+logs.txt
+notes.md
+debugging.py
+patch.md
+flask_pipeline.py
+
 *.pkl
 *.pth
 *.pt
@@ -6,6 +12,7 @@
 .*
 *.ipynb
 */
+
 !/main/
 !/train/
 !/models/
@@ -17,6 +24,3 @@
 !model.pth
 !trained_weights.pkl
 !vocabulary.pkl
-logs.txt
-notes.md
-

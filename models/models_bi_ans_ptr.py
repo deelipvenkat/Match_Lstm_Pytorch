@@ -1,3 +1,5 @@
+"""module containing the match-lstm model with bidirectional answer pointer"""
+
 import torch 
 import torch.nn as nn
 import torch.nn.functional as F

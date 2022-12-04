@@ -1,4 +1,12 @@
-# need to upgrade this file to handle multiple answers in squad dev set & getting max score.
+"""
+Module used to compute F1/EM SCORE 
+
+FUNCTIONS:
+
+  f1_score(prediction,target)
+  em_score(prediction,target)
+"""
+
 import sys
 import yaml
 import torch

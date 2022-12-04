@@ -1,3 +1,4 @@
+"""training loop with checkpointing (pause/resume training)"""
 import torch
 import torch.nn.functional as F
 import sys
