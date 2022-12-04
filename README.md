@@ -1,6 +1,6 @@
 ## **MACHINE QUESTION-ANSWERING SYSTEM** 
 
-### Implementation of MATCH-LSTM ( *Shuohang Wang & Jing Jiang 2016* ) model on SQUAD ( *Rajpurkar et al. 2016* ) dataset from scratch using Pytorch.
+### Implementation of MATCH-LSTM ( *Shuohang Wang & Jing Jiang 2016* ) model on SQUAD ( *Rajpurkar et al. 2016* ) from scratch using Pytorch.
 
 <br>
 
