@@ -4,7 +4,6 @@ debugging.py
 patch.md
 flask_pipeline.py
 
-*.pkl
 *.pth
 *.pt
 *.pyc
@@ -22,6 +21,4 @@ flask_pipeline.py
 !docker/templates
 !.dockerignore
 !model.pth
-!trained_weights.pkl
-!vocabulary.pkl
 !datasets
