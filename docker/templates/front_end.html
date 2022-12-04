@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+
+context_area.scroll
+{
+Width:5px;
+Height:10 px;
+}
+
+context_area{
+    overflow-y:scroll;
+    color: black;
+    
+}
+
+question_area{
+    overflow-y:scroll;
+    color: black;
+    
+}
+
+
+</style>
+
+<body style="background-color: #141617"> 
+
+
+<h1 style="color:white;">MACHINE READING COMPREHENSION</h1>
+
+<form id="nlp" action= "{{url_for('predict')}}" method= "post">
+
+  <p><label for="context">PASSAGE:</label></p>
+  
+  <textarea id="context" name="context_area" placeholder="ENTER YOUR PASSAGE HERE" rows="15" cols="80" 
+  style="background-color: black;color:rgb(203, 203, 203);font-size: 18pt;" required= "required" ></textarea>
+  
+  <br>
+  <br>
+  
+    <textarea id="question" name="question_area" placeholder="ENTER YOUR QUESTION HERE" 
+    rows="3" cols="80" style="background-color: black;color:rgb(203, 203, 203);font-size: 18pt;" required= "required" ></textarea
+    
+  <br>
+  <br>
+    
+  <button type="submit" style="width:130px;height:30px;;">GET ANSWER</button>
+
+  <button id="reset" style="position:absolute; bottom:300px; right: 550px">Reset the Question!</button><br><br>
+
+  <button type="reset" style="position:absolute; top:117px; right: 550px">Reset the entire form!</button><br><br>
+</form>
+
+<p></p>
+
+<p style ="font-size: 22pt;" >{{ prediction_text }}</p>
+
+<script type="text/javascript">
+
+  document.getElementById('reset').onclick= function() {
+
+      var field= document.getElementById('question');
+
+      field.value= field.defaultValue;
+
+  };
+  
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"
+integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+$(document).on('submit','#todo-form',function(e)
+         {
+console.log('hello');
+e.preventDefault();
+$.ajax({
+type:'POST',
+url:'/',
+data:{
+todo:$("#todo").val()
+},
+success:function()
+{
+alert('saved');
+}
+})
+});
+</script>
+
+</body>
+</html>

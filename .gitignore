@@ -10,4 +10,13 @@
 !/train/
 !/models/
 !/.gitignore
+!*docker
+!docker/static
+!docker/templates
+!.dockerignore
+!model.pth
+!trained_weights.pkl
+!vocabulary.pkl
 logs.txt
+notes.md
+

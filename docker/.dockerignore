@@ -1,0 +1,6 @@
+squad_nlp/
+new.txt
+__pycache__/
+
+.gitignore
+.git/

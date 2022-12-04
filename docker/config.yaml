@@ -1,0 +1,6 @@
+search_length: 15
+trained_weight_path: "/home/deelip/Desktop/squad/deployment/trained_weights.pkl"
+vocab_path: "/home/deelip/Desktop/squad/deployment/vocabulary.pkl"
+hidden_units: 150
+embed_size: 100
+
