@@ -17,6 +17,7 @@ save_final_model_path: '/home/training_data/final_model_150.pth'
 proto_batch_size: 34
 train_val_ratio : 0.0
 
+# need to make necessary changes
 
 context_length : 400
 question_length : 30
