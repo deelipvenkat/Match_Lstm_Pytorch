@@ -17,6 +17,12 @@ device=['cuda' if torch.cuda.is_available() is True else 'cpu'][0]
 with open('/home/config.yaml') as f:
   config=yaml.safe_load(f)
 #-------------------------------------------------------------------------------------------------
+def my_collate(batch):
+  a=list(zip(*batch))
+  print(type(a[0]),type(a[1]),type(a[2]),type(a[3]))
+  a0,a1 = torch.stack(a[0],0), torch.stack(a[1], 0) 
+  return a0,a1,a[2],a[3]
+
 
 def re_trainer(epochs,model,optimizer
             ,train_dataset,val_dataloader,
@@ -53,7 +59,8 @@ def re_trainer(epochs,model,optimizer
       subset_data=torch.utils.data.Subset(train_dataset,indices[(batches_trained_epoch)*int(config['train_batch_size']):])
       
       train_dataloader=DataLoader(dataset=subset_data,batch_size=config['train_batch_size'],
-                            shuffle=False,num_workers=7,pin_memory=True)
+                            shuffle=False,num_workers=config['num_workers']
+                            ,pin_memory=True)
 
       restart=False
     
@@ -63,13 +70,14 @@ def re_trainer(epochs,model,optimizer
       subset_data=torch.utils.data.Subset(train_dataset,indices=indices)
 
       train_dataloader=DataLoader(dataset=subset_data,batch_size=config['train_batch_size'],
-                            shuffle=False,num_workers=7,pin_memory=True)
+                            shuffle=False,num_workers=config['num_workers']
+                            ,pin_memory=True)
 
     
     tq=tqdm(train_dataloader,colour='green')
     tq.set_description('epoch %s' %(epoch+1))
     running_loss_per_epoch=0
-
+    
     for context,question,start,end in tq:
       
       model.train()
@@ -81,6 +89,7 @@ def re_trainer(epochs,model,optimizer
               
         attention_matrix=model(context=context,question=question)
         # attention_matrix=exp_mask(attention_matrix,c_train_l)
+
         y_pred=torch.empty(current_batch_size)     
         
         for i in range(current_batch_size):
@@ -93,7 +102,7 @@ def re_trainer(epochs,model,optimizer
       scaler.scale(loss).backward()
       scaler.step(optimizer)
       scaler.update()
-      
+
       loss_=loss.item()  
       train_loss_record.append(loss_)
       running_loss_per_epoch+= loss_*current_batch_size
@@ -138,7 +147,6 @@ def re_trainer(epochs,model,optimizer
   save_graphs(train_loss_record,val_loss_record,f1_score_record)
 
 #-------------------------------------------------------------------------------------------------
-
 
 if __name__=='__main__':
   pass    

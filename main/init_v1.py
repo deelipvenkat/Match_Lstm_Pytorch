@@ -12,16 +12,15 @@ import torch.nn.functional as F
 from torch.cuda.amp import autocast, GradScaler
 
 from preprocessing import splitter,train_preprocessor
-from models import load_model
+from models.models import load_model
 from utils import get_answer_index,seq_length,load_checkpoint
 from dataloader import batched_data,batched_indexed_data,retrain_dataset
-#from train import trainer
 from evaluation import validate,proba_score_search
 from metrics import f1_score,em_score
 from tqdm.auto import tqdm
 from spacy.tokens import DocBin
 from spacy.lang.en import English
-from retrainer_optimized import re_trainer
+from train.retrainer import re_trainer
 
 #from models_bi_ans_ptr import load_model
 
@@ -74,12 +73,15 @@ if __name__=='__main__':
         v=i[i!=0]
         unpad_context.append(v)
 
-
-  data_zip=list(zip(unpad_context,q_train_pad,ans_start[:83219],ans_end[:83219],c_train_len))
+  """
+  data_zip=list(zip(unpad_context,q_train_pad,ans_start[:83219]
+      ,ans_end[:83219],c_train_len,c_train_pad))
   sorted_data = sorted(data_zip, key=lambda x: x[4], reverse=False)
   unpad_context_s,q_train_s,start_index_s,end_index_s,c_train_len_s=zip(*sorted_data)
 
-  training_dataset=retrain_dataset(unpad_context_s,q_train_s,start_index_s,end_index_s)      
+  """
+  
+  training_dataset=retrain_dataset(c_train_pad,q_train_pad,ans_start,ans_end)              
 
   # write a load checkpoint function which looks cleaner here.    
   if config['checkpoint_exists']:

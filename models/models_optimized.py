@@ -139,7 +139,6 @@ class decoder_forward(nn.Module):
         
     context=context.unsqueeze(1)
     
-
     output,(_,mem)=self.lstm_layer(torch.cat((context,attn_combination),dim=2),(hidden,mem)) 
 
     return output,mem

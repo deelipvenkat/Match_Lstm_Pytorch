@@ -12,10 +12,10 @@ import torch.nn.functional as F
 from torch.cuda.amp import autocast, GradScaler
 
 from preprocessing import splitter,train_preprocessor
-from models import load_model
+from models.models import load_model
 from utils import get_answer_index,seq_length,load_checkpoint
 from dataloader import batched_data,batched_indexed_data
-from train import trainer
+from train.train import trainer
 from evaluation import validate,proba_score_search
 from metrics import f1_score,em_score
 from tqdm.auto import tqdm

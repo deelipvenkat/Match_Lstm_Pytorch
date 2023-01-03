@@ -14,10 +14,9 @@ import torch.nn.functional as F
 from torch.cuda.amp import autocast , GradScaler
 
 from preprocessing import splitter,train_preprocessor
-from models import load_model
+from models.models import load_model
 from utils import get_answer_index
 from dataloader import batched_data,batched_indexed_data
-#from train import trainer
 from metrics import f1_score , em_score
 
 with open('/home/config.yaml') as f:

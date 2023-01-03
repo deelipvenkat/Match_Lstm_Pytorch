@@ -12,7 +12,7 @@ import torch.nn.functional as F
 from torch.cuda.amp import autocast, GradScaler
 
 from preprocessing import splitter,train_preprocessor
-from models_optimized import load_model
+from models.models_optimized import load_model
 from utils import get_answer_index,seq_length,load_checkpoint
 from dataloader import retrain_dataset_optimized,train_dataset,optimized_dataloader,optimized_val_dataloader
 from train import trainer
@@ -21,7 +21,7 @@ from metrics import f1_score,em_score
 from tqdm.auto import tqdm
 from spacy.tokens import DocBin
 from spacy.lang.en import English
-from retrainer_optimized import re_trainer
+from train.retrainer_optimized import re_trainer
 
 #from models_bi_ans_ptr import load_model
 
