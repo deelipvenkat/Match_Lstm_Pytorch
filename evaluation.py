@@ -239,6 +239,51 @@ def question_answer(model,context,question):
   # tokenized context- need not be perfect , but decent
   
   #TEST YOUR BUILD WITH YOUR OWN PASSAGE AND QUESTION *********************************
+
+def validate_loss(dl,model):
+  
+  """
+  computes loss - takes in ans start/end index additionaly as inputs.
+  """
+
+  running_loss=0
+  criterion=torch.nn.BCELoss()
+
+  for context_,question_,_,ans_start_,ans_end_ in dl:
+    
+    batch_at_iteration=context_.size(0)
+
+    if isinstance(ans_start_,list):
+
+      context_,question_=context_.to(device),question_.to(device)
+
+    else:
+      context_,question_,ans_start_,ans_end_=context_.to(device),question_.to(device),ans_start_.to(device),ans_end_.to(device)
+    
+    y_pred=torch.empty(batch_at_iteration,device=device)
+    model.eval()
+
+    attn_matrix=model(context=context_,question=question_).to(device)
+
+    for i in range(batch_at_iteration):
+      
+      holder=[]
+      
+      for ans_no in range(len(ans_start[i])):
+        
+        y_predict=attn_matrix[i,ans_start_[i][ans_no],0]*attn_matrix[i,ans_end_[i][ans_no],1]
+        holder.append(y_predict)
+
+      y_pred[i] = max(holder)
+
+    loss=criterion(y_pred,torch.ones(batch_at_iteration).to(device)).to(device)
+
+    loss_=loss.item()
+ 
+    running_loss+=loss_*batch_at_iteration
+    
+  val_loss=running_loss/len(dl.dataset)
+  return val_loss
 #------------------------------------------------------------------------------------------------#
 
 

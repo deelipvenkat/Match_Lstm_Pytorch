@@ -5,7 +5,7 @@ import sys
 from torch.cuda.amp import autocast , GradScaler
 from tqdm import tqdm
 from utils import Early_Stopping, SaveBestModel , save_graphs,exponential_mask
-from evaluation import validate,validation_loss , validate_f1
+from evaluation import validate,validation_loss , validate_f1, validate_loss
 import yaml
 from torch.utils.data import DataLoader
 import random
@@ -109,12 +109,12 @@ def re_trainer(epochs,model,optimizer
       writer.add_scalar('train_loss/iteration',loss_,total_iteration)
       batches_trained_epoch+=1 
 
-      if (total_iteration+1)%config['model_checkpointing_iteration']==0:
+      if ((total_iteration+1)%config['model_checkpointing_iteration'])==0:
         
         with torch.no_grad():
           
           model.eval()
-          val_loss=validation_loss(dt_val=val_dataloader,model=model)
+          val_loss=validate_loss(dl=val_dataloader,model=model)
           val_loss_record.append(val_loss)
           writer.add_scalar('validation_loss',val_loss,(total_iteration//config['model_checkpointing_iteration'])+1)
 
@@ -134,9 +134,10 @@ def re_trainer(epochs,model,optimizer
     seed_value+=1
     
     with torch.no_grad():
-      f1=validate_f1(dt=val_dataloader,models=model)
+      f1,em=validate(dt=val_dataloader,models=model) # added em score too after each epoch.
       f1_score_record.append(f1)
       print(" validation f1_score for epoch {}".format(epoch+1),f1*100)
+      print(" validation em_score for epoch {}".format(epoch+1),em*100)
 
       writer.add_scalar('f1_score/epoch',f1,epoch+1)
 

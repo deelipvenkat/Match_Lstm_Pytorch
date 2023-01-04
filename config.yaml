@@ -1,7 +1,7 @@
 checkpoint_exists: False
 checkpoint_path: '/home/training_data/best_model_64.pth'
-model_checkpointing_iteration: 12
-learning_rate: 0.0005 # 0.00033/0.00035/0.000375/0.0004 if sqrt 0.007 for b=256 or 0.005 for 32
+model_checkpointing_iteration: 8 # try to make it half 
+learning_rate: 0.001 # 0.00033/0.00035/0.000375/0.0004 if sqrt 0.007 for b=256 or 0.005 for 32
 bucket_size_multiplier: 5
 epochs: 10
 hidden_units: 150
