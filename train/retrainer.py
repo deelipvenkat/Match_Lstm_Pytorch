@@ -134,11 +134,9 @@ def re_trainer(epochs,model,optimizer
     seed_value+=1
     
     with torch.no_grad():
-      f1,em=validate(dt=val_dataloader,models=model) # added em score too after each epoch.
+      f1=validate_f1(dt=val_dataloader,models=model)
       f1_score_record.append(f1)
       print(" validation f1_score for epoch {}".format(epoch+1),f1*100)
-      print(" validation em_score for epoch {}".format(epoch+1),em*100)
-
       writer.add_scalar('f1_score/epoch',f1,epoch+1)
 
   writer.close()

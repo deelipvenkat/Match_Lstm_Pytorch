@@ -26,7 +26,7 @@ from train.retrainer import re_trainer
 
 if __name__=='__main__':
 
-  with open('config.yaml') as f:
+  with open('/home/config.yaml') as f:
     config=yaml.safe_load(f)
 
   device=['cuda' if torch.cuda.is_available() is True else 'cpu'][0]
@@ -48,6 +48,9 @@ if __name__=='__main__':
   start=pickle.load(open('/home/pickle_files/start_index.pkl','rb'))
   end=pickle.load(open('/home/pickle_files/end_index.pkl','rb'))
 
+  val_ans_start=pickle.load(open('/home/pickle_files/val_start.pkl','rb'))
+  val_ans_end=pickle.load(open('/home/pickle_files/val_end.pkl','rb'))
+
   match_model=load_model(hidden_units=config['hidden_units'],device=device,weights=trained_weight)
 
   pytorch_all_params = sum(p.numel() for p in match_model.parameters())
@@ -60,9 +63,9 @@ if __name__=='__main__':
 
   training_dataset=retrain_dataset(c_train_pad,q_train_pad,start,end)
 
-  #batch_val_data=batched_indexed_data(c_val_pad,q_val_pad,
-    #      ans_val_pad,ans_val_start,ans_val_end
-     #     ,batch=config['val_batch_size'],num_workers=config['num_workers'])
+  batch_val_data=batched_indexed_data(c_val_pad,q_val_pad,
+          ans_val_pad,val_ans_start,val_ans_end
+          ,batch=config['val_batch_size'],num_workers=config['num_workers'])
           
    
   if config['checkpoint_exists']:

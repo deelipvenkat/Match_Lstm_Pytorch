@@ -141,13 +141,11 @@ def validate_f1(dt,models):
     models.eval()
     attn_matrix=models(context=context_,question=question_).to(device)
     score=proba_score_search(attn_matrix)
-
     ans_list=answer_from_context(context_,score)
     
     f1_=f1_score(ans_list,answer_)
     length_1.append(f1_*context_.size(0))
       
-
   f1_total=sum(length_1)/len(dt.dataset)
 
   return f1_total
@@ -269,7 +267,10 @@ def validate_loss(dl,model):
       
       holder=[]
       
-      for ans_no in range(len(ans_start[i])):
+      for ans_no in range(5):
+
+        if (ans_start_[i][ans_no]==398) and (ans_end_[i][ans_no]==398):
+          continue 
         
         y_predict=attn_matrix[i,ans_start_[i][ans_no],0]*attn_matrix[i,ans_end_[i][ans_no],1]
         holder.append(y_predict)

@@ -68,10 +68,12 @@ class retrain_dataset(Dataset):
 
 #*************************************************************************************************
 
-def batched_indexed_data(c_pad,q_pad,ans_pad,ans_start,ans_end,batch,num_workers,shuffle=True):
+def batched_indexed_data(c_pad,q_pad,ans_pad,ans_start,ans_end
+    ,batch,num_workers,shuffle=True,collate_fn=None):
   
   squad_train=squad_index_data(c_pad,q_pad,ans_pad,ans_start,ans_end)
-  data_train=DataLoader(dataset=squad_train,batch_size=batch,pin_memory=True,shuffle=shuffle,num_workers=num_workers)
+  data_train=DataLoader(dataset=squad_train,batch_size=batch,
+    pin_memory=True,shuffle=shuffle,num_workers=num_workers,collate_fn=None)
 
   return data_train
 
@@ -90,6 +92,13 @@ def custom_collate(batch):
     t=pad_sequence(a[0],batch_first=True)
     t2 = torch.stack(a[1], 0)        
     return t,t2,a[2],a[3]
+
+def raw_collate(batch):
+    a=list(zip(*batch))
+    t=pad_sequence(a[0],batch_first=True)
+    t2 = torch.stack(a[1], 0)        
+    return t,t2,a[2],a[3]
+
 
 #**************************************************************************************************
 
