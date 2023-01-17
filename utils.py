@@ -174,6 +174,39 @@ def seq_length(p):
         s_.append(len(i[i!=0]))
     return s_
 
+#-------------------------------------------------------------------------------------------------
+
+
+def last_saved_model(epoch,model,optimizer,train_losses
+                    ,val_losses,f1_scores,seed_value,batches_trained):
+  if True:
+
+    torch.save({'epoch': epoch, # FIX : EPOCH+1
+    'model_state_dict': model.state_dict(),
+    'optimizer_state_dict': optimizer.state_dict(),
+    'train_loss_data':train_losses,
+    'val_loss_data': val_losses,
+    'f1_score_data':f1_scores,
+    'seed_value':seed_value,
+    'batches_trained':batches_trained},config['last_model_path'])
+
+
+#-------------------------------------------------------------------------------------------------
+
+
+def good_saved_model(epoch,model,optimizer,train_losses
+                    ,val_losses,f1_scores,best_f1,seed_value,batches_trained):
+  if True:
+
+    torch.save({'epoch': epoch, # FIX : EPOCH+1
+    'model_state_dict': model.state_dict(),
+    'optimizer_state_dict': optimizer.state_dict(),
+    'train_loss_data':train_losses,
+    'val_loss_data': val_losses,
+    'f1_score_data':f1_scores,
+    'best_f1':best_f1,
+    'seed_value':seed_value,
+    'batches_trained':batches_trained},config['good_model_path'])
 
 #-------------------------------------------------------------------------------------------------
 # model checkpointing
@@ -193,7 +226,7 @@ class SaveBestModel:
         
         if current_loss < self.best_loss:
             self.best_loss = current_loss
-            torch.save({'epoch': epoch,
+            torch.save({'epoch': epoch, # FIX : EPOCH+1
             'model_state_dict': model.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
             'train_loss_data':train_losses,

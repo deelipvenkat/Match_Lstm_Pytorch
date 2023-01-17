@@ -1,18 +1,21 @@
-checkpoint_exists: False
-checkpoint_path: '/home/training_data/best_model_b64.pth'
-model_checkpointing_iteration: 8 
-learning_rate: 0.001 # 0.001  0.00033/0.00035/0.000375/0.0004 if sqrt 0.007 for b=256 or 0.005 for 32
+checkpoint_exists: True
+checkpoint_path: '/home/training_data/last_model_b32.pth'
+model_checkpointing_iteration: 5 
+learning_rate: 0.0007 # 0.007 should have been better 
 bucket_size_multiplier: 5
-epochs: 10
+epochs: 8
 hidden_units: 150
-train_batch_size: 64 
-val_batch_size: 1024
+train_batch_size: 32 
+val_batch_size: 4096
 early_stopping_patience: 10
 early_stopping_delta: 0.5
 embed_size : 100
-num_workers: 7
-save_best_model_path: '/home/training_data/best_model_b64.pth'
-save_final_model_path: '/home/training_data/final_model_b64.pth'
+num_workers: 6
+save_best_model_path: '/home/training_data/best_model_b32.pth'
+save_final_model_path: '/home/training_data/final_model_b32.pth'
+
+last_model_path: '/home/training_data/last_model_b32.pth'
+good_model_path: '/home/training_data/good_model_b32.pth'
 
 proto_batch_size: 34
 train_val_ratio : 0.0

@@ -2,14 +2,16 @@
 import torch
 import torch.nn.functional as F
 import sys
+import os
 from torch.cuda.amp import autocast , GradScaler
 from tqdm import tqdm
-from utils import Early_Stopping, SaveBestModel , save_graphs,exponential_mask
+from utils import Early_Stopping, SaveBestModel , save_graphs,last_saved_model,good_saved_model
 from evaluation import validate,validation_loss , validate_f1, validate_loss
 import yaml
 from torch.utils.data import DataLoader
 import random
 import math
+import pickle
 from torch.utils.tensorboard import SummaryWriter
 
 device=['cuda' if torch.cuda.is_available() is True else 'cpu'][0]
@@ -33,6 +35,17 @@ def re_trainer(epochs,model,optimizer
   
   best_loss_=min(val_loss_record) if len(val_loss_record)!=0 else float('inf')
   save_best_model = SaveBestModel(best_loss=best_loss_)
+  
+  if os.path.exists('/home/training_data/f1_high.pkl'):
+    high_f1_record=pickle.load(open('/home/training_data/f1_high.pkl','rb'))
+    print('pickle file found')
+
+  else:
+    high_f1_record=[]
+
+  val_loss=float('inf')
+  f1_best=0    
+
 
   early_stopping=Early_Stopping(patience=config['early_stopping_patience'],min_delta=config['early_stopping_delta'])
   
@@ -122,12 +135,31 @@ def re_trainer(epochs,model,optimizer
             print('EARLY STOPPING ACTIVATED')  
             break
 
-        save_best_model(val_loss,epoch,model,optimizer,train_loss_record,
-          val_loss_record,f1_score_record,seed_value,batches_trained_epoch) # checkpointing low val_loss model
+        if val_loss>3 :
+           
+          save_best_model(val_loss,epoch,model,optimizer,train_loss_record,
+            val_loss_record,f1_score_record,seed_value,batches_trained_epoch) # checkpointing low val_loss model
+
+        else :
+
+          f1_best=validate_f1(dt=val_dataloader,models=model)
+          score=max(high_f1_record) if len(high_f1_record)>0 else 0
+          if f1_best>=score:
+            high_f1_record.append(f1_best)
+            
+            pickle.dump(high_f1_record,open('/home/training_data/f1_high.pkl','wb'))
+            
+            good_saved_model(epoch,model,optimizer,train_loss_record,
+              val_loss_record,f1_score_record,f1_best,seed_value,batches_trained_epoch)
+
+        last_saved_model(epoch,model,optimizer,train_loss_record,
+          val_loss_record,f1_score_record,seed_value,batches_trained_epoch)
+
+          
 
       total_iteration+=1
           
-      tq.set_postfix(loss=loss_) # tqdm printing of loss
+      tq.set_postfix(train_loss=loss_,val_loss=val_loss,best_f1=f1_best) # tqdm printing of loss
 
     print('running loss for epoch {}: '.format(epoch+1), running_loss_per_epoch/(len(train_dataset)-(config['train_batch_size']*batches_left_before_training))) # loss per epoch avg
     

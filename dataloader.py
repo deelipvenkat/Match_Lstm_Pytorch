@@ -69,11 +69,11 @@ class retrain_dataset(Dataset):
 #*************************************************************************************************
 
 def batched_indexed_data(c_pad,q_pad,ans_pad,ans_start,ans_end
-    ,batch,num_workers,shuffle=True,collate_fn=None):
+    ,batch,num_workers,shuffle=False):
   
   squad_train=squad_index_data(c_pad,q_pad,ans_pad,ans_start,ans_end)
   data_train=DataLoader(dataset=squad_train,batch_size=batch,
-    pin_memory=True,shuffle=shuffle,num_workers=num_workers,collate_fn=None)
+    pin_memory=True,shuffle=shuffle,num_workers=num_workers)
 
   return data_train
 

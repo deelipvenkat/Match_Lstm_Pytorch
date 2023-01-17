@@ -131,24 +131,27 @@ def tokens_to_sentence(token,vocab): # accepts single tokens sentence
 #------------------------------------------------------------------------------------------------#
 
 def validate_f1(dt,models):
-  length_1=[]
 
-  for context_,question_,answer_,_,_ in dt:
-    
-    context_=context_.to(device)
-    question_=question_.to(device)
-    answer_=answer_.to(device)
-    models.eval()
-    attn_matrix=models(context=context_,question=question_).to(device)
-    score=proba_score_search(attn_matrix)
-    ans_list=answer_from_context(context_,score)
-    
-    f1_=f1_score(ans_list,answer_)
-    length_1.append(f1_*context_.size(0))
+  with torch.no_grad():
+
+    length_1=[]
+
+    for context_,question_,answer_,_,_ in dt:
       
-  f1_total=sum(length_1)/len(dt.dataset)
+      context_=context_.to(device)
+      question_=question_.to(device)
+      answer_=answer_.to(device)
+      models.eval()
+      attn_matrix=models(context=context_,question=question_).to(device)
+      score=proba_score_search(attn_matrix)
+      ans_list=answer_from_context(context_,score)
+      
+      f1_=f1_score(ans_list,answer_)
+      length_1.append(f1_*context_.size(0))
+        
+    f1_total=sum(length_1)/len(dt.dataset)
 
-  return f1_total
+    return f1_total
 
 
 def validate(dt,models):
@@ -188,38 +191,39 @@ def validation_loss(dt_val,model):
   """
   computes loss - takes in ans start/end index additionaly as inputs.
   """
+  with torch.no_grad():
 
-  running_loss=0
-  criterion=torch.nn.BCELoss()
+    running_loss=0
+    criterion=torch.nn.BCELoss()
 
-  for context_,question_,_,ans_start_,ans_end_ in dt_val:
-    
-    batch_at_iteration=context_.size(0)
-
-    if isinstance(ans_start_,list):
-
-      context_,question_=context_.to(device),question_.to(device)
-
-    else:
-      context_,question_,ans_start_,ans_end_=context_.to(device),question_.to(device),ans_start_.to(device),ans_end_.to(device)
-    
-    y_pred=torch.empty(batch_at_iteration,device=device)
-    model.eval()
-
-    attn_matrix=model(context=context_,question=question_).to(device)
-
-    for i in range(batch_at_iteration):
+    for context_,question_,_,ans_start_,ans_end_ in dt_val:
       
-      y_pred[i]=attn_matrix[i,ans_start_[i],0]*attn_matrix[i,ans_end_[i],1]
+      batch_at_iteration=context_.size(0)
 
-    loss=criterion(y_pred,torch.ones(batch_at_iteration).to(device)).to(device)
+      if isinstance(ans_start_,list):
 
-    loss_=loss.item()
- 
-    running_loss+=loss_*batch_at_iteration
-    
-  val_loss=running_loss/len(dt_val.dataset)
-  return val_loss
+        context_,question_=context_.to(device),question_.to(device)
+
+      else:
+        context_,question_,ans_start_,ans_end_=context_.to(device),question_.to(device),ans_start_.to(device),ans_end_.to(device)
+      
+      y_pred=torch.empty(batch_at_iteration,device=device)
+      model.eval()
+
+      attn_matrix=model(context=context_,question=question_).to(device)
+
+      for i in range(batch_at_iteration):
+        
+        y_pred[i]=attn_matrix[i,ans_start_[i],0]*attn_matrix[i,ans_end_[i],1]
+
+      loss=criterion(y_pred,torch.ones(batch_at_iteration).to(device)).to(device)
+
+      loss_=loss.item()
+  
+      running_loss+=loss_*batch_at_iteration
+      
+    val_loss=running_loss/len(dt_val.dataset)
+    return val_loss
 
 #------------------------------------------------------------------------------------------------#
 
