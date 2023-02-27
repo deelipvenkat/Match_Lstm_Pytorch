@@ -1,6 +1,6 @@
 # **MACHINE QUESTION-ANSWERING SYSTEM** 
 
-Re-Implementation of [MATCH-LSTM ( *Shuohang Wang & Jing Jiang 2016* )](https://arxiv.org/abs/1608.07905) model on [SQUAD ( *Rajpurkar et al. 2016* )](https://arxiv.org/abs/1606.05250) dataset from scratch with Pytorch.
+Re-Implementation of [MATCH-LSTM ( *Shuohang Wang & Jing Jiang 2016* )](https://arxiv.org/abs/1608.07905) model on [SQUAD ( *Rajpurkar et al. 2016* )](https://arxiv.org/abs/1606.05250) dataset from scratch on Pytorch.
 
 <br>
 
