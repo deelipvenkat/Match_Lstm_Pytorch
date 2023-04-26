@@ -10,7 +10,7 @@ Create a conda environment for python(3.8.12) and install the dependencies used 
 ```
 pip install -r requirements.txt
 ```
-## Execution
+## Model Card
 
 ## Results
 
