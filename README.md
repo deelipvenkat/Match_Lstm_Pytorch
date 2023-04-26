@@ -12,16 +12,17 @@ pip install -r requirements.txt
 ```
 ## Model Details
 
-Learning rate: 0.007
-Batch size: 64
-Hidden size: 150
-Word Embedding : Glove 100d
+- Learning rate: 0.007  
+- Batch size: 64  
+- Hidden size: 150  
+- Word Embedding: Glove 100d  
 
 ## Training Details
 
-Epochs:8
-Training Time : ~ 8hrs
-Training Hardware : Nvidia RTX 5000
+- Epochs: 8  
+- Training Time: ~ 8hrs  
+- Training Hardware: Nvidia RTX 5000  
+
 
 ## Results
 
