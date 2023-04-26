@@ -15,15 +15,13 @@ Create a conda environment for python(3.8.12) and install the dependencies used 
 ```
 pip install -r requirements.txt
 ```
-## Model Details
+## Model & Training Details
 
 - Learning rate: 0.007  
 - Batch size: 64  
 - Hidden size: 150  
 - Word Embedding: Glove 100d  
-
-## Training Details
-
+- Optimizer: Adam
 - Epochs: 8  
 - Training Time: ~ 8hrs  
 - Training Hardware: Nvidia RTX 5000  
@@ -36,7 +34,7 @@ pip install -r requirements.txt
 |Match-lstm(b) | 68.66%   | 55.54%  | 
 
 * (b) refers to the boundary model in match-lstm, where the start/end index of the answer in the passage is predicted.
-* The model was evaluated on squad v1.0 dev set.
+* The model was evaluated on squad v1.1 dev set.
 ## References
 
 [Wang, S., & Jiang, J. (2016). Machine comprehension using match-lstm and answer pointer. arXiv preprint arXiv:1608.07905.](https://arxiv.org/abs/1608.07905)
