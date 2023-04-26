@@ -10,7 +10,18 @@ Create a conda environment for python(3.8.12) and install the dependencies used 
 ```
 pip install -r requirements.txt
 ```
-## Model Card
+## Model Details
+
+Learning rate: 0.007
+Batch size: 64
+Hidden size: 150
+Word Embedding : Glove 100d
+
+## Training Details
+
+Epochs:8
+Training Time : ~ 8hrs
+Training Hardware : Nvidia RTX 5000
 
 ## Results
 
