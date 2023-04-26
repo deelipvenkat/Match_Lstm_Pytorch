@@ -21,5 +21,6 @@ pip install -r requirements.txt
 * (b) refers to the boundary model in match-lstm, where the start & end index of the answer tokens is predicted.
 ## References
 
-Wang, S., & Jiang, J. (2016). Machine comprehension using match-lstm and answer pointer. arXiv preprint arXiv:1608.07905.
-Rajpurkar, P., Zhang, J., Lopyrev, K., & Liang, P. (2016). SQuAD: 100,000+ questions for machine comprehension of text. arXiv preprint arXiv:1606.05250.
+[Wang, S., & Jiang, J. (2016). Machine comprehension using match-lstm and answer pointer. arXiv preprint arXiv:1608.07905.]((https://arxiv.org/abs/1608.07905))
+
+[Rajpurkar, P., Zhang, J., Lopyrev, K., & Liang, P. (2016). SQuAD: 100,000+ questions for machine comprehension of text. arXiv preprint arXiv:1606.05250.](https://arxiv.org/abs/1606.05250)
