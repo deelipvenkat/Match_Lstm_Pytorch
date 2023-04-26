@@ -16,7 +16,7 @@ pip install -r requirements.txt
 
 | Model        | F1-SCORE | EM-SCORE|
 |--------------|----------|---------|
-|Match-lstm(B) | 68.66%   | 55.54%  | 
+|Match-lstm(b) | 68.66%   | 55.54%  | 
 
-* (B) refers to the boundary model in match-lstm, where the start & end index of the answer tokens is predicted.
+* (b) refers to the boundary model in match-lstm, where the start & end index of the answer tokens is predicted.
 ## References
