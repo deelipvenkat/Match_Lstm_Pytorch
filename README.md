@@ -35,7 +35,7 @@ pip install -r requirements.txt
 |--------------|----------|---------|
 |Match-lstm(b) | 68.66%   | 55.54%  | 
 
-* (b) refers to the boundary model in match-lstm, where the start & end index of the answer tokens is predicted.
+* (b) refers to the boundary model in match-lstm, where the start/end index of the answer in the passage is predicted.
 ## References
 
 [Wang, S., & Jiang, J. (2016). Machine comprehension using match-lstm and answer pointer. arXiv preprint arXiv:1608.07905.](https://arxiv.org/abs/1608.07905)
