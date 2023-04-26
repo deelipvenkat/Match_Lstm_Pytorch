@@ -24,7 +24,7 @@ pip install -r requirements.txt
 - Optimizer: Adam
 - Epochs: 8  
 - Training Time: ~ 8hrs  
-- Training Hardware: Nvidia RTX 5000  
+- Training Hardware: Nvidia RTX 5000 16gb VRAM
 
 
 ## Results
