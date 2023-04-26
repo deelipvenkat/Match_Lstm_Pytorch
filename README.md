@@ -1,4 +1,4 @@
-# **MACHINE QUESTION-ANSWERING USING MATCH-LSTM + ANSWER POINTER NETWORK** 
+# **Question Answering with Match-LSTM on SQuAD 1.1** 
 
 Re-Implementation of [MATCH-LSTM ( *Shuohang Wang & Jing Jiang 2016* )](https://arxiv.org/abs/1608.07905) model on [SQUAD V1.1 ( *Rajpurkar et al. 2016* )](https://arxiv.org/abs/1606.05250) dataset on Pytorch.
 
