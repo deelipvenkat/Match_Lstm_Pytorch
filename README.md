@@ -15,6 +15,18 @@ Create a conda environment for python(3.8.12) and install the dependencies used 
 ```
 pip install -r requirements.txt
 ```
+
+To run the model in your local machine, Follow these instructions to download & run the docker image of the model.
+
+```
+# Downloading the docker-image from dockerhub
+docker pull deelipvenkat/squad_image
+
+# starting a docker container from the image
+docker run -d -p 6666:16003 deelipvenkat/squad_image
+```
+In your web-browser, go to this url http://localhost:6666/ to use the application
+
 ## Model & Training Details
 
 - Learning rate: 0.007  
