@@ -19,7 +19,7 @@ pip install -r requirements.txt
 To run the model in your local machine, Follow these instructions to download & run the docker image of the model.
 
 ```
-# Downloading the docker-image from dockerhub
+# Downloading the docker-image of match-lstm model from dockerhub
 docker pull deelipvenkat/squad_image
 
 # starting a docker container from the image
