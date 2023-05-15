@@ -20,10 +20,10 @@ To run the model in your local machine, Follow these instructions to download & 
 
 ```
 # Downloading the docker-image of match-lstm model from dockerhub
-docker pull deelipvenkat/squad_image
+docker pull deelipvenkat/squad_image:pytorch
 
 # starting a docker container from the image
-docker run -d -p 6666:16003 deelipvenkat/squad_image
+docker run -d -p 6666:16003 deelipvenkat/squad_image:pytorch
 ```
 In your web-browser, go to this url http://localhost:6666/ to use the application
 
